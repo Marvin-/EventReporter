@@ -1,25 +1,26 @@
 require "csv"
+require_relative "methods.rb"
+COMMANDS = {
+  load: "Accepts <filename> option. Erase any loaded data and parse the specified file. If no filename is given, it will default to event_attendees.csv.
+", 
+  help: "Output a listing of the available individual commands. Accepts a <command> option which outputs a description of how to use the specific command.",
+  find: "Finds all records matching the criteria for the given attribute.", 
+  exit: "Exits program."
+}
 
-COMMANDS = [ "load", "help", "queue", "find" ]
-COMMAND = ""
-queue = []
+loop do   
+  puts "Please enter a command"
 
-puts "Please enter a command"
+  command = get_input
 
-def get_input
-  action = gets.chomp.strip.downcase.split(",").first
-
-  if !valid_command? action
-    puts "Invalid command. Pleas enter a valid command."
-    get_input
-  else
-    return action
+  case command
+  when :load
+    load
+  when :help
+    help
+  when :find
+    find
+  when :exit
+    exit
   end
 end
-
-def valid_command? command
-  COMMANDS.any? {|c| c == command }
-end 
-
-command = get_input
-
