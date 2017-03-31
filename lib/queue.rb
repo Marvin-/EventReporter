@@ -12,5 +12,17 @@ class Queue
     @contents = CSV.open filename, headers: true, header_converters: :symbol 
   end
 
- 
+  def count
+    if !@contents
+      puts 0
+    else 
+      puts @contents.count
+    end
+  end
+
+  def clear
+    @queue = []
+  end
+
+
 end
