@@ -4,9 +4,9 @@ QUEUE = Queue.new
 
 def get_command
   command = gets.chomp.strip.downcase.split(" ")
-  first_word = command.first.to_sym
+  invalid = command.first == nil || !valid_command?(command.first.to_sym)
 
-  if !valid_command? first_word
+  if invalid
     puts "Please enter a valid command. Type help for more"
     get_command
   else
@@ -34,7 +34,10 @@ end
 
 def help(command = "")
   if command.empty?
-    puts COMMANDS.keys.to_s
+    puts "***************"
+    puts "The following commands are available to you:"
+    puts COMMANDS.keys
+    puts "Type 'help' and a command for a command desctiption."
   end
 
   case command
