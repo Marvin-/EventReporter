@@ -19,3 +19,32 @@ def valid_command? command
   COMMANDS.any? {|k, v| k == command }
 end 
 
+def load 
+  QUEUE.load
+end
+
+def queue option
+  case option 
+  when "clear" 
+    QUEUE.clear
+  when "count"
+    QUEUE.count
+  end
+end
+
+def help(command = "")
+  if command.empty?
+    puts COMMANDS.keys.to_s
+  end
+
+  case command
+  when "load"  
+    puts COMMANDS[:load]
+  when "help"
+    puts COMMANDS[:help]
+  when "find"
+    puts COMMANDS[:find]
+  when "exit"
+    puts COMMANDS[:exit]
+  end
+end
